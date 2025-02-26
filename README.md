@@ -1,17 +1,14 @@
-### **1️⃣ Streaming for Large File Handling**
-Instead of loading the entire log file into memory, the script processes the file **line-by-line** using:
-- `fs.createReadStream()` → Reads the log file as a stream.
-- `readline.createInterface()` → Processes each line efficiently.
+# Log Extractor  
 
-This approach prevents **memory overload**, making it suitable for extremely large files.
+## Introduction  
+The Log Extractor is a Node.js script designed to quickly extract log entries for a given date from a large log file. It is optimized to handle extremely large files efficiently without consuming excessive memory.  
 
-### **2️⃣ Pattern Matching for Fast Filtering**
-- Each log entry starts with a **timestamp (`YYYY-MM-DD HH:MM:SS`)**.
-- The script **checks only the first 10 characters** (`YYYY-MM-DD`) of each line to determine if it matches the requested date.
-- Matched logs are **written immediately** to an output file to avoid high memory usage.
+## How It Works  
+- Reads the log file **line by line** using a streaming approach.  
+- **Matches** lines that start with the specified date (`YYYY-MM-DD`).  
+- **Writes** the filtered logs to an output file without loading everything into memory.  
 
-### **3️⃣ Efficient File Writing**
-- Uses `fs.createWriteStream()` to **stream matching logs directly to an output file**.
-- This avoids buffering large amounts of data in memory.
-
----
+## Usage  
+To extract logs for a specific date, run:  
+```sh
+node log_extractor.js "logs_2024.log" 2024-12-01
